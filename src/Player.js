@@ -11,6 +11,7 @@ export default Player = ({ navigation, route }) => {
       { name: 'Ingrid', character: 'percival' },
       { name: 'Ruan', character: 'mordred' },
       { name: 'Renan', character: 'minion' },
+      { name: 'Mauricio', character: 'morgana' },
     ]
   }
 

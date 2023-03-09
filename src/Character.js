@@ -13,6 +13,7 @@ export default Character = ({ navigation, route }) => {
     <SafeAreaView style={styles.container}>
       <Text style={styles.player}>{player}</Text>
       <Text style={styles.character}>{character.name}</Text>
+      <Text style={styles.power}>{`Você é do time do ${character.team === 'good' ? 'Bem' : 'Mal'}`}</Text>
       <Separator/>
       <Text style={styles.power}>{character.power()}</Text>
     </SafeAreaView>
