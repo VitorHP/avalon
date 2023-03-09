@@ -3,14 +3,14 @@ import { StyleSheet, Text, View, FlatList, Button, SafeAreaView } from 'react-na
 
 const Separator = () => <View style={styles.separator} />;
 
-export default Character = ({ navigation, route }) => {
+export default Player = ({ navigation, route }) => {
   const data = {
     players: [
-      { name: 'Vitor', character: 'Merlin' },
-      { name: 'Lorena', character: 'Percival' },
-      { name: 'Ingrid', character: 'Morgana' },
-      { name: 'Ruan', character: 'Assassino' },
-      { name: 'Renan', character: 'Minion' },
+      { name: 'Vitor', character: 'merlin' },
+      { name: 'Lorena', character: 'minion' },
+      { name: 'Ingrid', character: 'percival' },
+      { name: 'Ruan', character: 'mordred' },
+      { name: 'Renan', character: 'minion' },
     ]
   }
 

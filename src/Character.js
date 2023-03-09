@@ -1,15 +1,20 @@
 
 import { StyleSheet, Text, View, Image, Button, SafeAreaView } from 'react-native';
+import Game from './game';
 
 const Separator = () => <View style={styles.separator} />;
 
 export default Character = ({ navigation, route }) => {
+  const { params: { player, data: { players} } } = route;
+  const game = new Game(players)
+  const character = game.character(players.find((item) => item.name === player).character)
+
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.player}>PlayerName</Text>
-      <Text style={styles.character}>Percival</Text>
+      <Text style={styles.player}>{player}</Text>
+      <Text style={styles.character}>{character.name}</Text>
       <Separator/>
-      <Text style={styles.power}>Ruan e Lorena aparecem como Merlin pra você</Text>
+      <Text style={styles.power}>{character.power()}</Text>
     </SafeAreaView>
   );
 }
@@ -31,7 +36,8 @@ const styles = StyleSheet.create({
     fontSize: 30
   },
   power: {
-    fontSize: 20
+    fontSize: 20,
+    marginHorizontal: 16
   },
   separator: {
     marginVertical: 100,
