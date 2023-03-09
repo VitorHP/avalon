@@ -1,8 +1,12 @@
 import { useReducer } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+<<<<<<< HEAD
 import { appReducer, initialState } from './src/lib/reducer';
 import AppContext from './src/lib/context';
+=======
+import Camera from 'react-native-vision-camera';
+>>>>>>> React native vision camera
 
 import Home from './src/Home';
 import PlayersForm from './src/PlayersForm';
