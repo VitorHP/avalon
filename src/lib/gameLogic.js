@@ -1,6 +1,6 @@
 import shuffleSeed from "shuffle-seed";
 
-export default class Game {
+export default class GameLogic {
   constructor(playerData) {
     this.players = playerData
     this.spread = {

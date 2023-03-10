@@ -2,12 +2,12 @@
 import { useContext } from 'react';
 import { StyleSheet, Text, View, Image, Button, SafeAreaView } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
-import AppContext from './context';
-import Game from './game';
+import AppContext from './lib/context';
+import GameLogic from './lib/gameLogic';
 
-export default NewGame = ({ navigation }) => {
+export default Code = ({ navigation }) => {
   const context = useContext(AppContext);
-  const game = new Game(context.app.players)
+  const game = new GameLogic(context.app.players)
   const players = context.app.players.map(player => player.name)
 
   const code = {
@@ -17,8 +17,8 @@ export default NewGame = ({ navigation }) => {
   }
 
   function start() {
-    context.dispatch({ type: 'SET_PLAYERS', payload: game.sortCharacters(context.app.rules, context.app.seed) })
-    navigation.navigate('Board', { players: context.app.players, seed: context.app.seed })
+    context.dispatch({ type: 'SET_PLAYERS', payload: game.sortCharacters(context.app.rules, context.app.seed + context.app.game) })
+    navigation.navigate('Player')
   }
 
   return (

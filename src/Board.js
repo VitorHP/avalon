@@ -1,12 +1,12 @@
 
 import { useContext, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, Button, SafeAreaView, FlatList } from 'react-native';
-import AppContext from './context';
-import Game from './game';
+import AppContext from './lib/context';
+import GameLogic from './lib/gameLogic';
 
 export default Board = ({ navigation }) => {
   const context = useContext(AppContext);
-  const game = new Game(context.app.players)
+  const game = new GameLogic(context.app.players)
 
   const Item = ({ teamSize, round }) => (
     <View style={styles.row}>
@@ -31,6 +31,7 @@ export default Board = ({ navigation }) => {
         data={game.rounds()}
         renderItem={({ item, index }) => <Item teamSize={item} round={index + 1}/>}
       />
+      <Text>{`Seed: ${context.app.seed}`}</Text>
     <Button
       title='Encerrar Partida'
       onPress={reset}

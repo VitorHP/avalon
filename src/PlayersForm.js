@@ -4,9 +4,9 @@ import { useContext, useState } from 'react';
 import { View, Button, SafeAreaView, TextInput, Text, FlatList } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import styles from './styles';
-import AppContext from './context';
+import AppContext from './lib/context';
 
-export default NewGame = ({ navigation }) => {
+export default PlayersForm = ({ navigation }) => {
   const [player, setPlayer] = useState('');
 
   const Item = ({ player, index }) => (

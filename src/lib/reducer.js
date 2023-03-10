@@ -33,9 +33,28 @@ export function appReducer(state, action) {
 
   return {
     ...state,
-    currentPlayer: '',
+    seed: seedReducer(state.seed, action),
+    currentPlayer: currentPlayerReducer(state.currentPlayer, action),
     players: playersReducer(state.players, action),
     rules: rulesReducer(state.rules, action)
+  }
+}
+
+function seedReducer(seed, action) {
+  switch(action.type) {
+    case 'NEW_GAME':
+      return Math.floor(Math.random() * 10000);
+    default:
+      return seed;
+  }
+}
+
+function currentPlayerReducer(currentPlayer, action) {
+  switch(action.type) {
+    case 'SET_CURRENT_PLAYER':
+      return action.payload;
+    default:
+      return currentPlayer;
   }
 }
 

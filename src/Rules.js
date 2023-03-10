@@ -3,11 +3,9 @@ import { StyleSheet } from 'react-native';
 import { useContext } from 'react';
 import { View, Button, SafeAreaView, Text, Switch } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import AppContext from './context';
-import Game from './game';
+import AppContext from './lib/context';
 
-
-export default NewGame = ({ navigation }) => {
+export default Rules = ({ navigation }) => {
   const context = useContext(AppContext);
 
   const setRule = (rule, value) => {

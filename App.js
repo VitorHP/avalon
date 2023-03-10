@@ -1,11 +1,11 @@
 import { useReducer } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { appReducer, initialState } from './src/reducer';
-import AppContext from './src/context';
+import { appReducer, initialState } from './src/lib/reducer';
+import AppContext from './src/lib/context';
 
 import Home from './src/Home';
-import NewGame from './src/NewGame';
+import PlayersForm from './src/PlayersForm';
 import Code from './src/Code';
 import Character from './src/Character';
 import Player from './src/Player';
@@ -29,8 +29,8 @@ export default function App() {
             component={Home}
           ></Stack.Screen>
           <Stack.Screen
-            name="NewGame"
-            component={NewGame}
+            name="PlayersForm"
+            component={PlayersForm}
           ></Stack.Screen>
           <Stack.Screen
             name="Code"

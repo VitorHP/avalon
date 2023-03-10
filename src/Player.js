@@ -1,21 +1,20 @@
 
 import { StyleSheet, Text, View, FlatList, Button, SafeAreaView } from 'react-native';
+import { useContext } from 'react';
+import AppContext from './lib/context';
+import { shuffle } from 'shuffle-seed';
 
 export default Player = ({ navigation }) => {
-  const data = {
-    players: [
-      { name: 'Vitor', character: 'merlin' },
-      { name: 'Lorena', character: 'minion' },
-      { name: 'Ingrid', character: 'percival' },
-      { name: 'Ruan', character: 'mordred' },
-      { name: 'Renan', character: 'minion' },
-      { name: 'Mauricio', character: 'morgana' },
-    ]
+  const context = useContext(AppContext);
+
+  const selectPlayer = (player) => {
+    context.dispatch({ type: 'SET_CURRENT_PLAYER', payload: player })
+    navigation.navigate('Character')
   }
 
   const Item = ({ player: { name }, index }) => (
     <View style={styles.item} key={index}>
-      <Button title={name} onPress={() => navigation.navigate('Character', { player: name, data })}/>
+      <Button title={name} onPress={() => selectPlayer(name)}/>
     </View>
   );
 
@@ -23,7 +22,7 @@ export default Player = ({ navigation }) => {
     <SafeAreaView style={styles.container}>
       <Text style={styles.title}>Escolha seu nome</Text>
       <FlatList
-        data={data.players}
+        data={shuffle(context.app.players, context.app.seed)}
         renderItem={({ item, index }) => <Item player={item} index={index}/>}
         keyExtractor={item => item.player}
       />
