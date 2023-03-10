@@ -1,42 +1,54 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image, Button, SafeAreaView } from 'react-native';
-import QRCode from 'react-native-qrcode-svg';
+import { useReducer } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { appReducer, initialState } from './src/reducer';
+import AppContext from './src/context';
 
 import Home from './src/Home';
 import NewGame from './src/NewGame';
 import Code from './src/Code';
 import Character from './src/Character';
 import Player from './src/Player';
+import Rules from './src/Rules';
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const [app, dispatch] = useReducer(
+    appReducer,
+    initialState
+  )
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={Home}
-        ></Stack.Screen>
-        <Stack.Screen
-          name="NewGame"
-          component={NewGame}
-        ></Stack.Screen>
-        <Stack.Screen
-          name="Code"
-          component={Code}
-        ></Stack.Screen>
-        <Stack.Screen
-          name="Character"
-          component={Character}
-        ></Stack.Screen>
-        <Stack.Screen
-          name="Player"
-          component={Player}
-        ></Stack.Screen>
-      </Stack.Navigator>
-    </NavigationContainer>
+    <AppContext.Provider value={{ app, dispatch }}>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Home"
+            component={Home}
+          ></Stack.Screen>
+          <Stack.Screen
+            name="NewGame"
+            component={NewGame}
+          ></Stack.Screen>
+          <Stack.Screen
+            name="Code"
+            component={Code}
+          ></Stack.Screen>
+          <Stack.Screen
+            name="Character"
+            component={Character}
+          ></Stack.Screen>
+          <Stack.Screen
+            name="Player"
+            component={Player}
+          ></Stack.Screen>
+          <Stack.Screen
+            name="Rules"
+            component={Rules}
+          ></Stack.Screen>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </AppContext.Provider>
   )
 }

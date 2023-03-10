@@ -14,4 +14,10 @@ export default styles = StyleSheet.create({
   separator: {
     marginVertical: 8,
   },
+  input: {
+    height: 40,
+    marginVertical: 8,
+    borderWidth: 1,
+    padding: 10,
+  },
 });

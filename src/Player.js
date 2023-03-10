@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, FlatList, Button, SafeAreaView } from 'react-na
 
 const Separator = () => <View style={styles.separator} />;
 
-export default Player = ({ navigation, route }) => {
+export default Player = ({ navigation }) => {
   const data = {
     players: [
       { name: 'Vitor', character: 'merlin' },

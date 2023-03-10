@@ -1,24 +1,19 @@
 
 import { StyleSheet, Text, View, Image, Button, SafeAreaView } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
+import { useContext } from 'react';
+import AppContext from './context';
 
-export default NewGame = ({ navigation }) => {
-  const data = {
-    players: [
-      { name: 'Vitor', character: 'Merlin' },
-      { name: 'Lorena', character: 'Percival' },
-      { name: 'Ingrid', character: 'Morgana' },
-      { name: 'Ruan', character: 'Assassino' },
-      { name: 'Renan', character: 'Minion' },
-    ]
-  }
+export default NewGame = ({ navigation, route }) => {
+  const { params: players } = route;
+  const context = useContext(AppContext);
 
   return (
     <SafeAreaView style={styles.container}>
-       <QRCode
-          value={JSON.stringify(data)}
-          size={300}
-        />
+      <QRCode
+        value={JSON.stringify(context.app.players)}
+        size={300}
+      />
     </SafeAreaView>
   );
 }
