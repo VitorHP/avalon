@@ -1,7 +1,14 @@
 
 export const initialState = {
+  seed: Math.floor(Math.random() * 10000),
   currentPlayer: '',
-  players: [],
+  players: [
+    { name: 'Player 1' },
+    { name: 'Player 2' },
+    { name: 'Player 3' },
+    { name: 'Player 4' },
+    { name: 'Player 5' },
+  ],
   rules: {
     merlin: false,
     assassin: false,
@@ -33,6 +40,8 @@ function playersReducer(players, action) {
         ...players.slice(0, action.payload),
         ...players.slice(action.payload + 1),
       ];
+    case 'SET_PLAYERS':
+      return action.payload;
     default:
       return players;
   }

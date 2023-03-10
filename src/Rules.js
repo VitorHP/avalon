@@ -5,10 +5,12 @@ import { View, Button, SafeAreaView, TextInput, Text, FlatList, Switch } from 'r
 import { StatusBar } from 'expo-status-bar';
 import { appReducer, initialState } from './reducer';
 import AppContext from './context';
+import Game from './game';
 
 
 export default NewGame = ({ navigation }) => {
   const context = useContext(AppContext);
+  const game = new Game(context.app.players)
 
   const setRule = (rule, value) => {
     context.dispatch({ type: 'SET_RULES', payload: { rule, value } });
@@ -35,9 +37,10 @@ export default NewGame = ({ navigation }) => {
         <Rule label="Usar Mordred" rule='mordred'></Rule>
       </View>
 
+      <Text>{JSON.stringify(context.app.rules)}</Text>
       <Button
         title="Iniciar"
-        onPress={() => navigation.navigate('Code')}
+        onPress={() => navigation.navigate('Code', { players: context.app.players, seed: context.app.seed })}
       ></Button>
       <StatusBar style="auto" />
     </SafeAreaView>

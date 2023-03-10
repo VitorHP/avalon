@@ -10,7 +10,7 @@ export default NewGame = ({ navigation }) => {
   const [player, setPlayer] = useState('');
 
   const Item = ({ player, index }) => (
-    <View style={newGame.item}>
+    <View style={newGame.item} key={index}>
       <Text>{player.name}</Text>
       <Button
         title="X"

@@ -1,8 +1,17 @@
+import shuffleSeed from "shuffle-seed";
 
 export default class Game {
   constructor(playerData) {
     this.players = playerData
-    this.data = [
+    this.spread = {
+      '5':  { good: 3, evil: 2 },
+      '6':  { good: 4, evil: 2 },
+      '7':  { good: 4, evil: 3 },
+      '8':  { good: 5, evil: 3 },
+      '9':  { good: 6, evil: 3 },
+      '10': { good: 6, evil: 4 }
+    }
+    this.characters = [
       {
         slug: 'merlin',
         name: 'Merlin',
@@ -55,7 +64,7 @@ export default class Game {
   }
 
   character(character) {
-    return this.data.find((char) => char.slug === character)
+    return this.characters.find((char) => char.slug === character)
   }
 
   playersOf(characters) {
@@ -72,9 +81,29 @@ export default class Game {
   }
 
   evilCharacters() {
-    return this.data
+    return this.characters
       .filter((character) => character.team === 'evil')
       .map((character) => character.slug)
+  }
+
+  includedCharacters(rules) {
+    return Object.keys(rules).filter(rule => rules[rule])
+  }
+
+  sortCharacters(rules, seed) {
+    const { good, evil } = this.spread[this.players.length.toString()]
+    const basicCharacters = new Array(good).fill('soldier').concat(new Array(evil).fill('minion'))
+
+    const roster = this.includedCharacters(rules).reduce((acc, char) => {
+      const team = this.character(char).team
+      const index = acc.indexOf(team === 'good' ? 'soldier' : 'minion')
+
+      if (index !== -1) acc[index] = char;
+
+      return acc;
+    }, basicCharacters)
+
+    return shuffleSeed.shuffle(this.players, seed).map((player, index) => ({ ...player, character: roster[index] }));
   }
 
 }

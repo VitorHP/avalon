@@ -15,8 +15,8 @@ export default Player = ({ navigation }) => {
     ]
   }
 
-  const Item = ({ player: { name } }) => (
-    <View style={styles.item}>
+  const Item = ({ player: { name }, index }) => (
+    <View style={styles.item} key={index}>
       <Button title={name} onPress={() => navigation.navigate('Character', { player: name, data })}/>
     </View>
   );
@@ -26,7 +26,7 @@ export default Player = ({ navigation }) => {
       <Text style={styles.title}>Escolha seu nome</Text>
       <FlatList
         data={data.players}
-        renderItem={({ item }) => <Item player={item}/>}
+        renderItem={({ item, index }) => <Item player={item} index={index}/>}
         keyExtractor={item => item.player}
       />
     </SafeAreaView>
