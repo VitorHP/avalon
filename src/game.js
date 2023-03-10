@@ -11,6 +11,14 @@ export default class Game {
       '9':  { good: 6, evil: 3 },
       '10': { good: 6, evil: 4 }
     }
+    this.teamSizePerRound = {
+      '5':  [2, 3, 2, 3, 3],
+      '6':  [2, 3, 4, 3, 4],
+      '7':  [2, 3, 3, 4, 4],
+      '8':  [3, 4, 4, 5, 5],
+      '9':  [3, 4, 4, 5, 5],
+      '10': [3, 4, 4, 5, 5]
+    }
     this.characters = [
       {
         slug: 'merlin',
@@ -104,6 +112,10 @@ export default class Game {
     }, basicCharacters)
 
     return shuffleSeed.shuffle(this.players, seed).map((player, index) => ({ ...player, character: roster[index] }));
+  }
+
+  rounds() {
+    return this.teamSizePerRound[this.players.length.toString()]
   }
 
 }

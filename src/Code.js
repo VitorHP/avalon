@@ -1,13 +1,24 @@
 
+import { useContext } from 'react';
 import { StyleSheet, Text, View, Image, Button, SafeAreaView } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
+import AppContext from './context';
+import Game from './game';
 
-export default NewGame = ({ navigation, route }) => {
-  const { params: data } = route;
+export default NewGame = ({ navigation }) => {
+  const context = useContext(AppContext);
+  const game = new Game(context.app.players)
+  const players = context.app.players.map(player => player.name)
 
   const code = {
-    ...data,
-    players: data.players.map(player => player.name)
+    seed: context.app.seed,
+    players: players,
+    game: context.app.game
+  }
+
+  function start() {
+    context.dispatch({ type: 'SET_PLAYERS', payload: game.sortCharacters(context.app.rules, context.app.seed) })
+    navigation.navigate('Board', { players: context.app.players, seed: context.app.seed })
   }
 
   return (
@@ -21,7 +32,7 @@ export default NewGame = ({ navigation, route }) => {
       </View>
       <Button
         title="Iniciar"
-        onPress={() => navigation.navigate('Code', { players: context.app.players, seed: context.app.seed })}
+        onPress={start}
       ></Button>
     </SafeAreaView>
   );

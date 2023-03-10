@@ -1,8 +1,6 @@
 
 import { StyleSheet, Text, View, FlatList, Button, SafeAreaView } from 'react-native';
 
-const Separator = () => <View style={styles.separator} />;
-
 export default Player = ({ navigation }) => {
   const data = {
     players: [

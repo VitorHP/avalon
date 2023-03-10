@@ -1,16 +1,14 @@
 
 import { StyleSheet } from 'react-native';
 import { useContext } from 'react';
-import { View, Button, SafeAreaView, TextInput, Text, FlatList, Switch } from 'react-native';
+import { View, Button, SafeAreaView, Text, Switch } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { appReducer, initialState } from './reducer';
 import AppContext from './context';
 import Game from './game';
 
 
 export default NewGame = ({ navigation }) => {
   const context = useContext(AppContext);
-  const game = new Game(context.app.players)
 
   const setRule = (rule, value) => {
     context.dispatch({ type: 'SET_RULES', payload: { rule, value } });
@@ -37,10 +35,9 @@ export default NewGame = ({ navigation }) => {
         <Rule label="Usar Mordred" rule='mordred'></Rule>
       </View>
 
-      <Text>{JSON.stringify(context.app.rules)}</Text>
       <Button
-        title="Iniciar"
-        onPress={() => navigation.navigate('Code', { players: context.app.players, seed: context.app.seed })}
+        title="Gerar QR Code"
+        onPress={() => navigation.navigate('Code')}
       ></Button>
       <StatusBar style="auto" />
     </SafeAreaView>
@@ -51,6 +48,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+    justifyContent: 'space-between',
     marginHorizontal: 16,
     paddingVertical: 16
   },

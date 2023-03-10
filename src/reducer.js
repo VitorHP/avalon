@@ -2,12 +2,21 @@
 export const initialState = {
   seed: Math.floor(Math.random() * 10000),
   currentPlayer: '',
+  game: 1,
+  round: 1,
   players: [
     { name: 'Player 1' },
     { name: 'Player 2' },
     { name: 'Player 3' },
     { name: 'Player 4' },
     { name: 'Player 5' },
+  ],
+  rounds: [
+    null,
+    null,
+    null,
+    null,
+    null,
   ],
   rules: {
     merlin: false,
@@ -20,6 +29,8 @@ export const initialState = {
 }
 
 export function appReducer(state, action) {
+  if (action.type === 'RESET') return initialState;
+
   return {
     ...state,
     currentPlayer: '',
