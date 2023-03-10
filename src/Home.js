@@ -25,7 +25,7 @@ export default Home = ({ navigation }) => {
       <Button
         style={styles.button}
         title="Ler QR Code"
-        onPress={() => navigation.navigate('Player')}
+        onPress={() => navigation.navigate('Camera')}
       ></Button>
       <StatusBar style="auto" />
     </SafeAreaView>

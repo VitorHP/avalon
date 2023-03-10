@@ -1,12 +1,8 @@
 import { useReducer } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-<<<<<<< HEAD
 import { appReducer, initialState } from './src/lib/reducer';
 import AppContext from './src/lib/context';
-=======
-import Camera from 'react-native-vision-camera';
->>>>>>> React native vision camera
 
 import Home from './src/Home';
 import PlayersForm from './src/PlayersForm';
@@ -15,6 +11,7 @@ import Character from './src/Character';
 import Player from './src/Player';
 import Rules from './src/Rules';
 import Game from './src/Game';
+import Camera from './src/Camera';
 
 const Stack = createNativeStackNavigator();
 
@@ -55,6 +52,10 @@ export default function App() {
           <Stack.Screen
             name="Game"
             component={Game}
+          ></Stack.Screen>
+          <Stack.Screen
+            name="Camera"
+            component={Camera}
           ></Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
