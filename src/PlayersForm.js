@@ -9,15 +9,6 @@ import AppContext from './lib/context';
 export default PlayersForm = ({ navigation }) => {
   const [player, setPlayer] = useState('');
 
-  const Item = ({ player, index }) => (
-    <View style={newGame.item} key={index}>
-      <Text>{player.name}</Text>
-      <Button
-        title="X"
-        onPress={() => removePlayer(index)}></Button>
-    </View>
-  );
-
   const context = useContext(AppContext);
 
   const addPlayer = () => {
@@ -28,6 +19,15 @@ export default PlayersForm = ({ navigation }) => {
   const removePlayer = (index) => {
     context.dispatch({ type: 'REMOVE_PLAYER', payload: index });
   }
+
+  const Item = ({ player, index }) => (
+    <View style={newGame.item} key={index}>
+      <Text>{player.name}</Text>
+      <Button
+        title="X"
+        onPress={() => removePlayer(index)}></Button>
+    </View>
+  );
 
   return (
     <SafeAreaView style={newGame.container}>
@@ -52,7 +52,7 @@ export default PlayersForm = ({ navigation }) => {
         <FlatList
           data={context.app.players}
           renderItem={({ item, index }) => <Item player={item} index={index}/>}
-          keyExtractor={item => item.player}
+          keyExtractor={player => player.name}
         />
       </View>
 

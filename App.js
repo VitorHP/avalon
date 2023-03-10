@@ -10,7 +10,7 @@ import Code from './src/Code';
 import Character from './src/Character';
 import Player from './src/Player';
 import Rules from './src/Rules';
-import Board from './src/Board';
+import Game from './src/Game';
 
 const Stack = createNativeStackNavigator();
 
@@ -49,8 +49,8 @@ export default function App() {
             component={Rules}
           ></Stack.Screen>
           <Stack.Screen
-            name="Board"
-            component={Board}
+            name="Game"
+            component={Game}
           ></Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>

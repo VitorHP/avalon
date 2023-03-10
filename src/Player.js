@@ -9,7 +9,7 @@ export default Player = ({ navigation }) => {
 
   const selectPlayer = (player) => {
     context.dispatch({ type: 'SET_CURRENT_PLAYER', payload: player })
-    navigation.navigate('Character')
+    navigation.navigate('Game')
   }
 
   const Item = ({ player: { name }, index }) => (

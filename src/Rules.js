@@ -4,9 +4,11 @@ import { useContext } from 'react';
 import { View, Button, SafeAreaView, Text, Switch } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import AppContext from './lib/context';
+import GameLogic from './lib/gameLogic';
 
 export default Rules = ({ navigation }) => {
   const context = useContext(AppContext);
+  const game = new GameLogic(context.app.players)
 
   const setRule = (rule, value) => {
     context.dispatch({ type: 'SET_RULES', payload: { rule, value } });
@@ -22,6 +24,11 @@ export default Rules = ({ navigation }) => {
     </View>
   )
 
+  function start() {
+    context.dispatch({ type: 'SET_PLAYERS', payload: game.sortCharacters(context.app.rules, context.app.seed + context.app.game) })
+    navigation.navigate('Player')
+  }
+
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -34,8 +41,8 @@ export default Rules = ({ navigation }) => {
       </View>
 
       <Button
-        title="Gerar QR Code"
-        onPress={() => navigation.navigate('Code')}
+        title="Start"
+        onPress={start}
       ></Button>
       <StatusBar style="auto" />
     </SafeAreaView>

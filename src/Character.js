@@ -18,10 +18,6 @@ export default Character = ({ navigation }) => {
       <Text style={styles.power}>{`Você é do time do ${character.team === 'good' ? 'Bem' : 'Mal'}`}</Text>
       <Separator/>
       <Text style={styles.power}>{character.power()}</Text>
-      <Button
-        title="Board"
-        onPress={() => navigation.navigate('Board')}
-      ></Button>
     </SafeAreaView>
   );
 }
