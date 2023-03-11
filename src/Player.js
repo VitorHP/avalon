@@ -24,7 +24,7 @@ export default Player = ({ navigation }) => {
       <FlatList
         data={shuffle(context.app.players, context.app.seed)}
         renderItem={({ item, index }) => <Item player={item} index={index}/>}
-        keyExtractor={item => item.player}
+        keyExtractor={item => item.name}
       />
     </SafeAreaView>
   );

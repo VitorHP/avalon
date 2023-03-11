@@ -5,11 +5,6 @@ export const initialState = {
   game: 1,
   round: 1,
   players: [
-    { name: 'Player 1' },
-    { name: 'Player 2' },
-    { name: 'Player 3' },
-    { name: 'Player 4' },
-    { name: 'Player 5' },
   ],
   rounds: [
     null,
@@ -33,6 +28,7 @@ export function appReducer(state, action) {
 
   return {
     ...state,
+    game: gameReducer(state.game, action),
     seed: seedReducer(state.seed, action),
     currentPlayer: currentPlayerReducer(state.currentPlayer, action),
     players: playersReducer(state.players, action),
@@ -40,10 +36,21 @@ export function appReducer(state, action) {
   }
 }
 
+function gameReducer(game, action) {
+  switch(action.type) {
+    case 'SET_GAME':
+      return action.payload.game;
+    default:
+      return game;
+  }
+}
+
 function seedReducer(seed, action) {
   switch(action.type) {
     case 'NEW_GAME':
       return Math.floor(Math.random() * 10000);
+    case 'SET_GAME':
+      return action.payload.seed;
     default:
       return seed;
   }
@@ -72,6 +79,8 @@ function playersReducer(players, action) {
       ];
     case 'SET_PLAYERS':
       return action.payload;
+    case 'SET_GAME':
+      return action.payload.players.map(name => ({ name }))
     default:
       return players;
   }
