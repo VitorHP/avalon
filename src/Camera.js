@@ -4,7 +4,8 @@ import { Text, StyleSheet } from 'react-native';
 import { Camera } from 'react-native-vision-camera';
 import { useScanBarcodes, BarcodeFormat } from 'vision-camera-code-scanner';
 import AppContext from './lib/context';
-import GameLogic from './lib/gameLogic';
+import Characters from './lib/characters';
+import Setup from './lib/setup';
 
 const LoadingView = () => <Text>Carregando...</Text>
 const NoPermission = () => <Text>Avalon precisa de permissões da câmera para ler o QR Code</Text>
@@ -23,13 +24,11 @@ export default CameraPage = ({ navigation }) => {
     checkCameraPermission();
   })
 
-
   useEffect(() => {
     if (barcodes.length > 0) {
-        context.dispatch({ type: 'SET_GAME', payload: JSON.parse(barcodes[0].displayValue) })
-        // const game = new GameLogic(context.app.players)
-        // context.dispatch({ type: 'SET_PLAYERS', payload: game.sortCharacters(context.app.rules, context.app.seed + context.app.game) })
-        // console.log('AFTER: ' + JSON.stringify(context.app.players))
+        const data = JSON.parse(barcodes[0].displayValue);
+
+        context.dispatch({ type: 'SET_GAME', payload: data });
         navigation.replace('Player')
     }
   }, [barcodes])

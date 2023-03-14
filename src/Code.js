@@ -6,12 +6,13 @@ import AppContext from './lib/context';
 
 export default Code = ({ navigation }) => {
   const context = useContext(AppContext);
-  const players = context.app.players.map(player => player.name)
+  const players = context.app.players
 
   const code = {
     seed: context.app.seed,
     players: players,
-    game: context.app.game
+    game: context.app.game,
+    characters: context.characters
   }
 
   return (

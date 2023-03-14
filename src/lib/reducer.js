@@ -13,7 +13,7 @@ export const initialState = {
     null,
     null,
   ],
-  rules: {
+  characters: {
     merlin: false,
     assassin: false,
     percival: false,
@@ -32,12 +32,12 @@ export function appReducer(state, action) {
     seed: seedReducer(state.seed, action),
     currentPlayer: currentPlayerReducer(state.currentPlayer, action),
     players: playersReducer(state.players, action),
-    rules: rulesReducer(state.rules, action)
+    characters: charactersReducer(state.characters, action)
   }
 }
 
 function gameReducer(game, action) {
-  switch(action.type) {
+  switch (action.type) {
     case 'SET_GAME':
       return action.payload.game;
     default:
@@ -46,7 +46,7 @@ function gameReducer(game, action) {
 }
 
 function seedReducer(seed, action) {
-  switch(action.type) {
+  switch (action.type) {
     case 'NEW_GAME':
       return Math.floor(Math.random() * 10000);
     case 'SET_GAME':
@@ -57,7 +57,7 @@ function seedReducer(seed, action) {
 }
 
 function currentPlayerReducer(currentPlayer, action) {
-  switch(action.type) {
+  switch (action.type) {
     case 'SET_CURRENT_PLAYER':
       return action.payload;
     default:
@@ -66,7 +66,7 @@ function currentPlayerReducer(currentPlayer, action) {
 }
 
 function playersReducer(players, action) {
-  switch(action.type) {
+  switch (action.type) {
     case 'ADD_PLAYER':
       return [
         ...players,
@@ -80,20 +80,20 @@ function playersReducer(players, action) {
     case 'SET_PLAYERS':
       return action.payload;
     case 'SET_GAME':
-      return action.payload.players.map(name => ({ name }))
+      return action.payload.players
     default:
       return players;
   }
 }
 
-function rulesReducer(rules, action) {
-  switch(action.type) {
-    case 'SET_RULES':
+function charactersReducer(characters, action) {
+  switch (action.type) {
+    case 'SET_CHARACTER':
       return {
-        ...rules,
-        [action.payload.rule]: action.payload.value
+        ...characters,
+        [action.payload.character]: action.payload.value
       };
     default:
-      return rules;
+      return characters;
   }
 }

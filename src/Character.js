@@ -1,6 +1,6 @@
 
 import { StyleSheet, Text, View, Image, Button, SafeAreaView } from 'react-native';
-import GameLogic from './lib/gameLogic';
+import Characters from './lib/characters';
 import { useContext } from 'react';
 import AppContext from './lib/context';
 
@@ -8,16 +8,16 @@ const Separator = () => <View style={styles.separator} />;
 
 export default Character = ({ navigation }) => {
   const context = useContext(AppContext);
-  const game = new GameLogic(context.app.players);
-  const character = game.character(context.app.players.find((item) => item.name === context.app.currentPlayer).character)
+  const characters = new Characters();
+  const character = characters.find(context.app.players.find((item) => item.name === context.app.currentPlayer).character)
 
   return (
     <SafeAreaView style={styles.container}>
       <Text style={styles.player}>{context.app.currentPlayer}</Text>
       <Text style={styles.character}>{character.name}</Text>
       <Text style={styles.power}>{`Você é do time do ${character.team === 'good' ? 'Bem' : 'Mal'}`}</Text>
-      <Separator/>
-      <Text style={styles.power}>{character.power()}</Text>
+      <Separator />
+      <Text style={styles.power}>{character.power(context.app.players)}</Text>
     </SafeAreaView>
   );
 }

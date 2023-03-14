@@ -2,11 +2,11 @@
 import { useContext, useEffect } from 'react';
 import { StyleSheet, Text, View, Image, Button, SafeAreaView, FlatList } from 'react-native';
 import AppContext from './lib/context';
-import GameLogic from './lib/gameLogic';
+import Characters from './lib/characters';
 
 export default Board = ({ navigation }) => {
   const context = useContext(AppContext);
-  const game = new GameLogic(context.app.players)
+  const game = new Characters()
 
   const Item = ({ teamSize, round }) => (
     <View style={styles.row}>
@@ -28,7 +28,7 @@ export default Board = ({ navigation }) => {
         <Text style={styles.cell}>Jogadores</Text>
       </View>
       <FlatList
-        data={game.rounds()}
+        data={game.rounds(context.app.players)}
         renderItem={({ item, index }) => <Item teamSize={item} round={index + 1}/>}
       />
       <Text>{`Seed: ${context.app.seed}`}</Text>

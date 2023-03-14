@@ -4,40 +4,43 @@ import { useContext } from 'react';
 import { View, Button, SafeAreaView, Text, Switch } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import AppContext from './lib/context';
-import GameLogic from './lib/gameLogic';
+import Setup from './lib/setup';
+import Characters from './lib/characters';
 
 export default Rules = ({ navigation }) => {
   const context = useContext(AppContext);
-  const game = new GameLogic(context.app.players)
 
-  const setRule = (rule, value) => {
-    context.dispatch({ type: 'SET_RULES', payload: { rule, value } });
+  const setCharacter = (character, value) => {
+    context.dispatch({ type: 'SET_CHARACTER', payload: { character, value } });
   }
 
-  const Rule = ({ label, rule }) => (
-    <View style={styles.rule}>
-      <Text style={styles.ruleLabel}>{label}</Text>
+  const Rule = ({ label, character }) => (
+    <View style={styles.character}>
+      <Text style={styles.characterLabel}>{label}</Text>
       <Switch
-        onValueChange={() => setRule(rule, !context.app.rules[rule])}
-        value={context.app.rules[rule]}
+        onValueChange={() => setCharacter(character, !context.app.characters[character])}
+        value={context.app.characters[character]}
       />
     </View>
   )
 
   function start() {
-    context.dispatch({ type: 'SET_PLAYERS', payload: game.sortCharacters(context.app.rules, context.app.seed + context.app.game) })
+    const setup = new Setup()
+    const characters = new Characters()
+
+    context.dispatch({ type: 'SET_PLAYERS', payload: setup.sort(context.app.players, characters.all(), context.app.characters, context.app.seed + context.app.game) })
     navigation.navigate('Player')
   }
 
   return (
     <SafeAreaView style={styles.container}>
       <View>
-        <Rule label="Usar Merlin" rule='merlin'></Rule>
-        <Rule label="Usar Assassino" rule='assassin'></Rule>
-        <Rule label="Usar Percival" rule='percival'></Rule>
-        <Rule label="Usar Morgana" rule='morgana'></Rule>
-        <Rule label="Usar Oberon" rule='oberon'></Rule>
-        <Rule label="Usar Mordred" rule='mordred'></Rule>
+        <Rule label="Usar Merlin" character='merlin'></Rule>
+        <Rule label="Usar Assassino" character='assassin'></Rule>
+        <Rule label="Usar Percival" character='percival'></Rule>
+        <Rule label="Usar Morgana" character='morgana'></Rule>
+        <Rule label="Usar Oberon" character='oberon'></Rule>
+        <Rule label="Usar Mordred" character='mordred'></Rule>
       </View>
 
       <Button
